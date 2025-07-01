@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FAQ - Perguntas Frequentes sobre o Showcase">
+    <title>FAQ - Showcase Docs</title>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .faq-category {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: var(--spacing-lg);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light-gray);
+            transition: background-color var(--transition-fast);
+        }
+        
+        .faq-question:hover {
+            background: #e5e7eb;
+        }
+        
+        .faq-question.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0 var(--spacing-lg);
+            max-height: 0;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+        
+        .faq-answer.active {
+            padding: var(--spacing-lg);
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform var(--transition-fast);
+        }
+        
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .search-faq {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .search-faq input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+        
+        .search-faq input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .category-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .category-nav button {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--light-gray);
+            background: white;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .category-nav button.active,
+        .category-nav button:hover {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube" style="margin-right: 0.5rem; color: var(--primary-green);"></i>
+                    <a href="/" style="color: inherit;">Showcase Docs</a>
+                </div>
+                
+                <nav class="nav-main">
+                    <a href="/">Início</a>
+                    <a href="/pages/getting-started/">Começar Agora</a>
+                    <a href="/pages/documentation/">Documentação</a>
+                    <a href="/pages/support/" class="active">Suporte</a>
+                    <a href="/pages/developers/">Desenvolvedores</a>
+                </nav>
+                
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Layout Principal -->
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <h4 style="margin-bottom: var(--spacing-md); color: var(--primary-blue);">
+                    <i class="fas fa-headset"></i> Suporte
+                </h4>
+                <ul>
+                    <li><a href="/pages/support/faq.html" class="active">FAQ</a></li>
+                    <li><a href="/pages/support/troubleshooting.html">Troubleshooting</a></li>
+                    <li><a href="/pages/support/contact.html">Contato</a></li>
+                    <li><a href="/pages/support/system-status.html">Status do Sistema</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Conteúdo Principal -->
+        <main class="content-area">
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs">
+                <a href="/">Início</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/pages/support/">Suporte</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>FAQ</span>
+            </nav>
+            
+            <!-- Cabeçalho -->
+            <div style="margin-bottom: var(--spacing-xl);">
+                <h1><i class="fas fa-question-circle" style="color: var(--primary-green); margin-right: 0.5rem;"></i>Perguntas Frequentes</h1>
+                <p style="font-size: 1.125rem; color: var(--medium-gray);">
+                    Encontre respostas rápidas para as dúvidas mais comuns sobre o Showcase.
+                </p>
+            </div>
+            
+            <!-- Busca no FAQ -->
+            <div class="search-faq">
+                <input type="text" id="faq-search" placeholder="Buscar nas perguntas frequentes...">
+            </div>
+            
+            <!-- Navegação por Categorias -->
+            <div class="category-nav">
+                <button class="active" data-category="all">Todas</button>
+                <button data-category="installation">Instalação</button>
+                <button data-category="usage">Uso Básico</button>
+                <button data-category="technical">Técnico</button>
+                <button data-category="billing">Cobrança</button>
+                <button data-category="troubleshooting">Problemas</button>
+            </div>
+            
+            <!-- FAQ - Instalação -->
+            <div class="faq-category" data-category="installation">
+                <h2><i class="fas fa-download"></i> Instalação e Configuração</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como instalar o Showcase Player?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O Showcase Player pode ser instalado em Windows, macOS e Linux:</p>
+                        <ol>
+                            <li>Acesse a área de downloads no portal do cliente</li>
+                            <li>Baixe a versão correspondente ao seu sistema operacional</li>
+                            <li>Execute o instalador como administrador</li>
+                            <li>Siga as instruções na tela</li>
+                        </ol>
+                        <p><a href="/pages/getting-started/installation.html">Ver guia completo de instalação</a></p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quais são os requisitos mínimos do sistema?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Requisitos mínimos:</strong></p>
+                        <ul>
+                            <li>Processador: Intel i3 ou AMD equivalente</li>
+                            <li>Memória RAM: 4GB</li>
+                            <li>Placa de vídeo: DirectX 11 compatível</li>
+                            <li>Armazenamento: 2GB livres</li>
+                            <li>Conexão com internet para sincronização</li>
+                        </ul>
+                        <p><strong>Recomendado:</strong> Intel i5, 8GB RAM, placa de vídeo dedicada</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ - Uso Básico -->
+            <div class="faq-category" data-category="usage">
+                <h2><i class="fas fa-play"></i> Uso Básico</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como criar minha primeira apresentação?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Siga nosso Quick Start Guide para criar sua primeira apresentação em 5 minutos:</p>
+                        <ol>
+                            <li>Acesse o Showcase Studio</li>
+                            <li>Crie um novo projeto</li>
+                            <li>Configure as categorias</li>
+                            <li>Adicione seu conteúdo</li>
+                            <li>Publique e sincronize</li>
+                        </ol>
+                        <p><a href="/pages/getting-started/quick-start.html">Seguir o Quick Start Guide</a></p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como sincronizar conteúdo entre Studio e Player?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A sincronização é feita através de códigos únicos:</p>
+                        <ol>
+                            <li>No Studio, publique seu projeto</li>
+                            <li>Copie o código de sincronização gerado</li>
+                            <li>No Player, vá em Configurações > Sincronização</li>
+                            <li>Cole o código e clique em "Sincronizar"</li>
+                        </ol>
+                        <p>A sincronização acontece automaticamente a cada 30 minutos ou pode ser forçada manualmente.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ - Técnico -->
+            <div class="faq-category" data-category="technical">
+                <h2><i class="fas fa-cog"></i> Questões Técnicas</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quais formatos de arquivo são suportados?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Imagens:</strong> JPG, PNG, GIF, BMP, TIFF</p>
+                        <p><strong>Vídeos:</strong> MP4, AVI, MOV, WMV, FLV</p>
+                        <p><strong>Documentos:</strong> PDF</p>
+                        <p><strong>Áudio:</strong> MP3, WAV, AAC</p>
+                        <p><strong>Tamanho máximo:</strong> 100MB por arquivo</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como configurar telas múltiplas?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O Showcase suporta configurações multi-tela:</p>
+                        <ol>
+                            <li>Conecte todas as telas ao computador</li>
+                            <li>Configure-as como "Estender" no Windows</li>
+                            <li>No Player, vá em Configurações > Display</li>
+                            <li>Selecione a tela principal para o Showcase</li>
+                            <li>Configure a resolução adequada</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ - Cobrança -->
+            <div class="faq-category" data-category="billing">
+                <h2><i class="fas fa-credit-card"></i> Cobrança e Licenças</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como funciona o modelo de licenciamento?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O Showcase utiliza licenciamento por dispositivo:</p>
+                        <ul>
+                            <li><strong>Licença Básica:</strong> 1 dispositivo, recursos essenciais</li>
+                            <li><strong>Licença Profissional:</strong> 3 dispositivos, recursos avançados</li>
+                            <li><strong>Licença Enterprise:</strong> Dispositivos ilimitados, suporte premium</li>
+                        </ul>
+                        <p>Entre em contato para planos personalizados.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ - Troubleshooting -->
+            <div class="faq-category" data-category="troubleshooting">
+                <h2><i class="fas fa-wrench"></i> Solução de Problemas</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>O Player não está sincronizando. O que fazer?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Verifique os seguintes pontos:</p>
+                        <ol>
+                            <li>Conexão com internet ativa</li>
+                            <li>Código de sincronização correto</li>
+                            <li>Firewall não está bloqueando o Player</li>
+                            <li>Horário do sistema está correto</li>
+                        </ol>
+                        <p>Se o problema persistir, <a href="/pages/support/contact.html">entre em contato</a> com nosso suporte.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>A apresentação está lenta. Como otimizar?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Para melhorar a performance:</p>
+                        <ul>
+                            <li>Otimize imagens (máximo 1920x1080)</li>
+                            <li>Comprima vídeos para web</li>
+                            <li>Reduza o número de elementos por tela</li>
+                            <li>Feche outros programas desnecessários</li>
+                            <li>Verifique se os drivers da placa de vídeo estão atualizados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Não encontrou resposta -->
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <div class="card-body text-center">
+                    <h3>Não encontrou a resposta que procurava?</h3>
+                    <p>Nossa equipe de suporte está pronta para ajudar!</p>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <a href="/pages/support/contact.html" class="btn btn-primary">
+                            <i class="fas fa-headset"></i> Entrar em Contato
+                        </a>
+                        <a href="/pages/support/troubleshooting.html" class="btn btn-secondary" style="margin-left: var(--spacing-sm);">
+                            <i class="fas fa-tools"></i> Troubleshooting
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isActive = this.classList.contains('active');
+                    
+                    // Fechar todas as outras respostas
+                    faqQuestions.forEach(q => {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('active');
+                    });
+                    
+                    // Abrir/fechar a resposta clicada
+                    if (!isActive) {
+                        this.classList.add('active');
+                        answer.classList.add('active');
+                    }
+                });
+            });
+            
+            // Filtro por categoria
+            const categoryButtons = document.querySelectorAll('.category-nav button');
+            const faqCategories = document.querySelectorAll('.faq-category');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // Atualizar botão ativo
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Mostrar/ocultar categorias
+                    faqCategories.forEach(cat => {
+                        if (category === 'all' || cat.dataset.category === category) {
+                            cat.style.display = 'block';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Busca no FAQ
+            const searchInput = document.getElementById('faq-search');
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(query) || answer.includes(query)) {
+                        item.style.display = 'block';
+                        item.parentElement.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Ocultar categorias vazias
+                faqCategories.forEach(category => {
+                    const visibleItems = category.querySelectorAll('.faq-item[style*="block"]');
+                    if (visibleItems.length === 0 && query !== '') {
+                        category.style.display = 'none';
+                    } else if (query === '') {
+                        category.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

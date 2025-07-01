@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quick Start Guide - Comece a usar o Showcase em 5 minutos">
+    <title>Quick Start Guide - Showcase Docs</title>
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .step-container {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+            overflow: hidden;
+        }
+        
+        .step-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            padding: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .step-content {
+            padding: var(--spacing-xl);
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .alert {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-md) 0;
+            border-left: 4px solid;
+        }
+        
+        .alert-info {
+            background: #eff6ff;
+            border-color: var(--info);
+            color: #1e40af;
+        }
+        
+        .alert-warning {
+            background: #fffbeb;
+            border-color: var(--warning);
+            color: #92400e;
+        }
+        
+        .alert-success {
+            background: #f0fdf4;
+            border-color: var(--success);
+            color: #166534;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green), var(--success));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .screenshot {
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin: var(--spacing-md) 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube" style="margin-right: 0.5rem; color: var(--primary-green);"></i>
+                    <a href="/" style="color: inherit;">Showcase Docs</a>
+                </div>
+                
+                <nav class="nav-main">
+                    <a href="/">Início</a>
+                    <a href="/pages/getting-started/" class="active">Começar Agora</a>
+                    <a href="/pages/documentation/">Documentação</a>
+                    <a href="/pages/support/">Suporte</a>
+                    <a href="/pages/developers/">Desenvolvedores</a>
+                </nav>
+                
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar...">
+                    <div id="search-results" class="search-results"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Layout Principal -->
+    <div class="main-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <h4 style="margin-bottom: var(--spacing-md); color: var(--primary-blue);">
+                    <i class="fas fa-rocket"></i> Começar Agora
+                </h4>
+                <ul>
+                    <li><a href="/pages/getting-started/quick-start.html" class="active">Quick Start Guide</a></li>
+                    <li><a href="/pages/getting-started/installation.html">Instalação do Player</a></li>
+                    <li><a href="/pages/getting-started/first-presentation.html">Primeira Apresentação</a></li>
+                    <li><a href="/pages/getting-started/system-requirements.html">Requisitos do Sistema</a></li>
+                </ul>
+                
+                <h4 style="margin: var(--spacing-xl) 0 var(--spacing-md); color: var(--primary-blue);">
+                    <i class="fas fa-question-circle"></i> Precisa de Ajuda?
+                </h4>
+                <ul>
+                    <li><a href="/pages/support/faq.html">FAQ</a></li>
+                    <li><a href="/pages/support/contact.html">Contato</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <!-- Conteúdo Principal -->
+        <main class="content-area">
+            <!-- Breadcrumbs -->
+            <nav class="breadcrumbs">
+                <a href="/">Início</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="/pages/getting-started/">Começar Agora</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Quick Start Guide</span>
+            </nav>
+            
+            <!-- Cabeçalho da Página -->
+            <div style="margin-bottom: var(--spacing-xl);">
+                <h1><i class="fas fa-rocket" style="color: var(--primary-green); margin-right: 0.5rem;"></i>Quick Start Guide</h1>
+                <p style="font-size: 1.125rem; color: var(--medium-gray);">
+                    Comece a usar o Showcase em apenas 5 minutos seguindo este guia passo a passo.
+                </p>
+                
+                <!-- Barra de Progresso -->
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p style="font-size: 0.875rem; color: var(--medium-gray); text-align: center;">
+                    Progresso: <span id="progress-text">0%</span>
+                </p>
+            </div>
+            
+            <!-- Tempo Estimado -->
+            <div class="alert alert-info">
+                <i class="fas fa-clock"></i>
+                <strong>Tempo estimado:</strong> 5-10 minutos
+                <br>
+                <strong>Pré-requisitos:</strong> Showcase Player instalado (se não tiver, <a href="/pages/getting-started/installation.html">instale aqui</a>)
+            </div>
+            
+            <!-- Passo 1 -->
+            <div class="step-container" data-step="1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h2 style="margin: 0; color: white;">Acesse o Showcase Studio</h2>
+                        <p style="margin: 0; opacity: 0.9;">Faça login na plataforma web</p>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <p>Abra seu navegador e acesse o Showcase Studio através do link fornecido pela Aqua Tecnologia.</p>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Importante:</strong> Certifique-se de ter suas credenciais de acesso em mãos.
+                    </div>
+                    
+                    <ol>
+                        <li>Digite o endereço do Showcase Studio no navegador</li>
+                        <li>Insira seu usuário e senha</li>
+                        <li>Clique em "Entrar"</li>
+                    </ol>
+                    
+                    <img src="/assets/images/pGtwU3Ay3BeR.png" alt="Tela de login do Showcase Studio" class="screenshot">
+                    
+                    <button class="btn btn-success" onclick="completeStep(1)">
+                        <i class="fas fa-check"></i> Completei este passo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Passo 2 -->
+            <div class="step-container" data-step="2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h2 style="margin: 0; color: white;">Crie um Novo Projeto</h2>
+                        <p style="margin: 0; opacity: 0.9;">Configure seu primeiro projeto</p>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <p>Agora vamos criar seu primeiro projeto no Showcase Studio.</p>
+                    
+                    <ol>
+                        <li>No painel principal, clique em <strong>"Novo Projeto"</strong></li>
+                        <li>Escolha um nome descritivo para seu projeto</li>
+                        <li>Selecione o template adequado para seu caso de uso:
+                            <ul>
+                                <li><strong>Imobiliário:</strong> Para vendas de imóveis</li>
+                                <li><strong>Museu:</strong> Para exposições culturais</li>
+                                <li><strong>Corporativo:</strong> Para apresentações empresariais</li>
+                                <li><strong>Personalizado:</strong> Para casos específicos</li>
+                            </ul>
+                        </li>
+                        <li>Clique em <strong>"Criar Projeto"</strong></li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Dica:</strong> Escolha um nome que facilite a identificação do projeto posteriormente.
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="completeStep(2)">
+                        <i class="fas fa-check"></i> Completei este passo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Passo 3 -->
+            <div class="step-container" data-step="3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h2 style="margin: 0; color: white;">Configure as Categorias</h2>
+                        <p style="margin: 0; opacity: 0.9;">Organize seu conteúdo</p>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <p>As categorias ajudam a organizar seu conteúdo de forma intuitiva para os usuários finais.</p>
+                    
+                    <ol>
+                        <li>No editor do projeto, vá para a seção <strong>"Categorias"</strong></li>
+                        <li>Clique em <strong>"Adicionar Categoria"</strong></li>
+                        <li>Para cada categoria:
+                            <ul>
+                                <li>Digite um nome claro e descritivo</li>
+                                <li>Faça upload de uma imagem representativa</li>
+                                <li>Adicione uma descrição breve (opcional)</li>
+                            </ul>
+                        </li>
+                        <li>Organize as categorias na ordem desejada</li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-images"></i>
+                        <strong>Formatos suportados:</strong> JPG, PNG, GIF (máximo 5MB por imagem)
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="completeStep(3)">
+                        <i class="fas fa-check"></i> Completei este passo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Passo 4 -->
+            <div class="step-container" data-step="4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h2 style="margin: 0; color: white;">Adicione Conteúdo</h2>
+                        <p style="margin: 0; opacity: 0.9;">Faça upload das suas mídias</p>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <p>Agora é hora de adicionar o conteúdo que será exibido na apresentação.</p>
+                    
+                    <ol>
+                        <li>Selecione uma categoria criada anteriormente</li>
+                        <li>Clique em <strong>"Adicionar Mídia"</strong></li>
+                        <li>Faça upload dos arquivos:
+                            <ul>
+                                <li><strong>Imagens:</strong> JPG, PNG, GIF</li>
+                                <li><strong>Vídeos:</strong> MP4, AVI, MOV</li>
+                                <li><strong>Documentos:</strong> PDF</li>
+                            </ul>
+                        </li>
+                        <li>Para cada arquivo, adicione:
+                            <ul>
+                                <li>Título descritivo</li>
+                                <li>Descrição (opcional)</li>
+                                <li>Tags para facilitar a busca</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Atenção:</strong> Arquivos muito grandes podem afetar a performance. Recomendamos otimizar as imagens antes do upload.
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="completeStep(4)">
+                        <i class="fas fa-check"></i> Completei este passo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Passo 5 -->
+            <div class="step-container" data-step="5">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h2 style="margin: 0; color: white;">Publique e Teste</h2>
+                        <p style="margin: 0; opacity: 0.9;">Finalize sua apresentação</p>
+                    </div>
+                </div>
+                <div class="step-content">
+                    <p>Com o conteúdo adicionado, é hora de publicar e testar sua apresentação.</p>
+                    
+                    <ol>
+                        <li>Clique em <strong>"Visualizar"</strong> para ver como ficará a apresentação</li>
+                        <li>Teste a navegação e interações</li>
+                        <li>Se estiver satisfeito, clique em <strong>"Publicar"</strong></li>
+                        <li>Copie o código de sincronização gerado</li>
+                        <li>No Showcase Player, insira o código para sincronizar</li>
+                    </ol>
+                    
+                    <div class="alert alert-success">
+                        <i class="fas fa-party-horn"></i>
+                        <strong>Parabéns!</strong> Sua primeira apresentação Showcase está pronta!
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="completeStep(5)">
+                        <i class="fas fa-check"></i> Completei este passo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Próximos Passos -->
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <div class="card-header">
+                    <h3><i class="fas fa-arrow-right" style="color: var(--primary-green);"></i> Próximos Passos</h3>
+                </div>
+                <div class="card-body">
+                    <p>Agora que você criou sua primeira apresentação, explore mais recursos:</p>
+                    
+                    <div class="grid grid-2" style="margin-top: var(--spacing-lg);">
+                        <a href="/pages/documentation/user-guide.html" class="card" style="text-decoration: none;">
+                            <div class="card-body">
+                                <h4><i class="fas fa-book"></i> Guia Completo</h4>
+                                <p>Aprenda todos os recursos avançados do Showcase</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/pages/documentation/best-practices.html" class="card" style="text-decoration: none;">
+                            <div class="card-body">
+                                <h4><i class="fas fa-star"></i> Melhores Práticas</h4>
+                                <p>Dicas para criar apresentações mais eficazes</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/pages/support/faq.html" class="card" style="text-decoration: none;">
+                            <div class="card-body">
+                                <h4><i class="fas fa-question-circle"></i> FAQ</h4>
+                                <p>Respostas para dúvidas comuns</p>
+                            </div>
+                        </a>
+                        
+                        <a href="/pages/support/contact.html" class="card" style="text-decoration: none;">
+                            <div class="card-body">
+                                <h4><i class="fas fa-headset"></i> Suporte</h4>
+                                <p>Entre em contato para ajuda personalizada</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feedback -->
+            <div class="card feedback-container" style="margin-top: var(--spacing-xl);">
+                <div class="card-body text-center">
+                    <h4>Este guia foi útil?</h4>
+                    <p>Seu feedback nos ajuda a melhorar a documentação.</p>
+                    <div style="margin-top: var(--spacing-md);">
+                        <button class="btn btn-success feedback-btn" data-helpful="true">
+                            <i class="fas fa-thumbs-up"></i> Sim, foi útil
+                        </button>
+                        <button class="btn btn-secondary feedback-btn" data-helpful="false" style="margin-left: var(--spacing-sm);">
+                            <i class="fas fa-thumbs-down"></i> Não foi útil
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    <script>
+        let completedSteps = 0;
+        const totalSteps = 5;
+        
+        function completeStep(stepNumber) {
+            const stepContainer = document.querySelector(`[data-step="${stepNumber}"]`);
+            const button = stepContainer.querySelector('.btn-success');
+            
+            if (!button.classList.contains('completed')) {
+                button.classList.add('completed');
+                button.innerHTML = '<i class="fas fa-check"></i> Concluído';
+                button.style.background = 'var(--success)';
+                completedSteps++;
+                
+                updateProgress();
+                
+                // Scroll para o próximo passo
+                if (stepNumber < totalSteps) {
+                    setTimeout(() => {
+                        const nextStep = document.querySelector(`[data-step="${stepNumber + 1}"]`);
+                        if (nextStep) {
+                            nextStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 500);
+                }
+            }
+        }
+        
+        function updateProgress() {
+            const percentage = (completedSteps / totalSteps) * 100;
+            const progressFill = document.getElementById('progress-fill');
+            const progressText = document.getElementById('progress-text');
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = Math.round(percentage) + '%';
+            
+            if (completedSteps === totalSteps) {
+                setTimeout(() => {
+                    alert('Parabéns! Você completou o Quick Start Guide! 🎉');
+                }, 500);
+            }
+        }
+        
+        // Inicializar feedback
+        document.addEventListener('DOMContentLoaded', function() {
+            const feedbackButtons = document.querySelectorAll('.feedback-btn');
+            feedbackButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const isHelpful = this.dataset.helpful === 'true';
+                    
+                    // Simular envio de feedback
+                    console.log('Feedback enviado:', { helpful: isHelpful, page: 'quick-start' });
+                    
+                    // Mostrar mensagem de agradecimento
+                    const container = this.parentElement;
+                    container.innerHTML = '<p style="color: var(--success);"><i class="fas fa-check"></i> Obrigado pelo seu feedback!</p>';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
