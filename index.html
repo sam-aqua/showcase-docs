@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal de Documentação do Showcase - Sistema de apresentações interativas para telas multitouch">
+    <meta name="keywords" content="showcase, documentação, apresentações interativas, multitouch, aqua tecnologia">
+    <meta name="author" content="Aqua Tecnologia">
+    
+    <title>Showcase - Portal de Documentação</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Showcase - Portal de Documentação">
+    <meta property="og:description" content="Documentação completa do Showcase - Sistema de apresentações interativas">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docs.showcase.aqua.com.br">
+    
+    <!-- Additional CSS for homepage -->
+    <style>
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .search-result-item {
+            display: block;
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--light-gray);
+            transition: background-color var(--transition-fast);
+        }
+        
+        .search-result-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-title {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .search-result-category {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .search-result-description {
+            font-size: 0.875rem;
+            color: var(--text-dark);
+        }
+        
+        .search-no-results {
+            padding: var(--spacing-lg);
+            text-align: center;
+            color: var(--medium-gray);
+        }
+        
+        mark {
+            background-color: #FEF3C7;
+            color: var(--text-dark);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        .stats-section {
+            background: var(--light-gray);
+            padding: var(--spacing-2xl) 0;
+            margin: var(--spacing-2xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 9999;
+            padding: var(--spacing-xl);
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-main {
+                display: none;
+            }
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-fast);
+            z-index: 1000;
+        }
+        
+        .back-to-top:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: var(--text-dark);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            z-index: 10000;
+            pointer-events: none;
+        }
+        
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube" style="margin-right: 0.5rem; color: var(--primary-green);"></i>
+                    Showcase Docs
+                </div>
+                
+                <!-- Navegação Principal -->
+                <nav class="nav-main">
+                    <a href="/" class="active">Início</a>
+                    <a href="/pages/getting-started/">Começar Agora</a>
+                    <a href="/pages/documentation/">Documentação</a>
+                    <a href="/pages/support/">Suporte</a>
+                    <a href="/pages/developers/">Desenvolvedores</a>
+                </nav>
+                
+                <!-- Busca -->
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" class="search-input" placeholder="Buscar na documentação...">
+                    <div id="search-results" class="search-results"></div>
+                </div>
+                
+                <!-- Menu Mobile Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div class="logo">
+                <i class="fas fa-cube" style="margin-right: 0.5rem; color: var(--primary-green);"></i>
+                Showcase Docs
+            </div>
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav style="display: flex; flex-direction: column; gap: 1rem;">
+            <a href="/" class="btn btn-primary">Início</a>
+            <a href="/pages/getting-started/" class="btn btn-secondary">Começar Agora</a>
+            <a href="/pages/documentation/" class="btn btn-secondary">Documentação</a>
+            <a href="/pages/support/" class="btn btn-secondary">Suporte</a>
+            <a href="/pages/developers/" class="btn btn-secondary">Desenvolvedores</a>
+        </nav>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate-on-scroll">Portal de Documentação Showcase</h1>
+            <p class="animate-on-scroll">Tudo que você precisa para criar apresentações interativas incríveis com o Showcase</p>
+            <div class="animate-on-scroll">
+                <a href="/pages/getting-started/quick-start.html" class="btn btn-success" style="margin-right: 1rem;">
+                    <i class="fas fa-rocket"></i>
+                    Começar Agora
+                </a>
+                <a href="/pages/documentation/" class="btn btn-secondary">
+                    <i class="fas fa-book"></i>
+                    Ver Documentação
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Actions -->
+    <section class="container">
+        <div class="quick-actions animate-on-scroll">
+            <div class="quick-action">
+                <div class="quick-action-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <h3>Quick Start</h3>
+                <p>Comece a usar o Showcase em 5 minutos com nosso guia rápido</p>
+                <a href="/pages/getting-started/quick-start.html" class="btn btn-primary">Começar</a>
+            </div>
+            
+            <div class="quick-action">
+                <div class="quick-action-icon">
+                    <i class="fas fa-download"></i>
+                </div>
+                <h3>Instalação</h3>
+                <p>Baixe e instale o Showcase Player em diferentes sistemas operacionais</p>
+                <a href="/pages/getting-started/installation.html" class="btn btn-primary">Instalar</a>
+            </div>
+            
+            <div class="quick-action">
+                <div class="quick-action-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3>FAQ</h3>
+                <p>Encontre respostas rápidas para as perguntas mais frequentes</p>
+                <a href="/pages/support/faq.html" class="btn btn-primary">Ver FAQ</a>
+            </div>
+            
+            <div class="quick-action">
+                <div class="quick-action-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>API</h3>
+                <p>Integre o Showcase com seus sistemas usando nossa API</p>
+                <a href="/pages/developers/api-reference.html" class="btn btn-primary">Ver API</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Seções Principais -->
+    <section class="container" style="margin: 3rem auto;">
+        <div class="grid grid-3 animate-on-scroll">
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="fas fa-rocket" style="color: var(--primary-green); margin-right: 0.5rem;"></i>Começar Agora</h3>
+                    <p>Guias rápidos e tutoriais para começar a usar o Showcase imediatamente.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li><a href="/pages/getting-started/quick-start.html">Quick Start Guide</a></li>
+                        <li><a href="/pages/getting-started/installation.html">Instalação do Player</a></li>
+                        <li><a href="/pages/getting-started/first-presentation.html">Primeira Apresentação</a></li>
+                    </ul>
+                    <a href="/pages/getting-started/" class="btn btn-primary">Ver Todos</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="fas fa-book" style="color: var(--primary-blue); margin-right: 0.5rem;"></i>Documentação</h3>
+                    <p>Documentação completa com guias detalhados e casos de uso por indústria.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li><a href="/pages/documentation/user-guide.html">Guia do Usuário</a></li>
+                        <li><a href="/pages/documentation/real-estate.html">Setor Imobiliário</a></li>
+                        <li><a href="/pages/documentation/museums.html">Museus e Cultura</a></li>
+                    </ul>
+                    <a href="/pages/documentation/" class="btn btn-primary">Ver Todos</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h3><i class="fas fa-headset" style="color: var(--warning); margin-right: 0.5rem;"></i>Suporte</h3>
+                    <p>Central de ajuda com FAQ, troubleshooting e canais de contato.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li><a href="/pages/support/faq.html">Perguntas Frequentes</a></li>
+                        <li><a href="/pages/support/troubleshooting.html">Troubleshooting</a></li>
+                        <li><a href="/pages/support/contact.html">Contato</a></li>
+                    </ul>
+                    <a href="/pages/support/" class="btn btn-primary">Ver Todos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Estatísticas -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="text-center mb-4">Showcase em Números</h2>
+            <div class="stats-grid animate-on-scroll">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Clientes Ativos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10k+</span>
+                    <span class="stat-label">Apresentações Criadas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Cidades Atendidas</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span class="stat-label">Uptime</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Casos de Uso em Destaque -->
+    <section class="container" style="margin: 3rem auto;">
+        <h2 class="text-center mb-4">Casos de Uso em Destaque</h2>
+        <div class="grid grid-2 animate-on-scroll">
+            <div class="card">
+                <div class="card-body">
+                    <img src="/assets/images/wyXXwgg1V7EU.jpg" alt="Setor Imobiliário" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                    <h3>Setor Imobiliário</h3>
+                    <p>Apresentações interativas para vendas de imóveis com tours virtuais, plantas e informações detalhadas.</p>
+                    <a href="/pages/documentation/real-estate.html" class="btn btn-primary">Saiba Mais</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <img src="/assets/images/lW0JHV6xjmvY.jpg" alt="Museus e Cultura" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem;">
+                    <h3>Museus e Cultura</h3>
+                    <p>Experiências interativas para museus com conteúdo multimídia e navegação intuitiva.</p>
+                    <a href="/pages/documentation/museums.html" class="btn btn-primary">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Showcase</h4>
+                    <p>Sistema de apresentações interativas para telas multitouch desenvolvido pela Aqua Tecnologia.</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" style="margin-right: 1rem;" data-tooltip="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" style="margin-right: 1rem;" data-tooltip="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" data-tooltip="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Documentação</h4>
+                    <a href="/pages/getting-started/">Começar Agora</a>
+                    <a href="/pages/documentation/">Guias Completos</a>
+                    <a href="/pages/support/faq.html">FAQ</a>
+                    <a href="/pages/developers/">Para Desenvolvedores</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Suporte</h4>
+                    <a href="/pages/support/contact.html">Contato</a>
+                    <a href="/pages/support/troubleshooting.html">Troubleshooting</a>
+                    <a href="mailto:suporte@aqua.com.br">suporte@aqua.com.br</a>
+                    <a href="tel:+5531999999999">+55 (31) 99999-9999</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Aqua Tecnologia</h4>
+                    <a href="https://aqua.com.br" target="_blank">Site Oficial</a>
+                    <a href="https://aqua.com.br/sobre" target="_blank">Sobre Nós</a>
+                    <a href="https://aqua.com.br/contato" target="_blank">Contato Comercial</a>
+                    <a href="https://aqua.com.br/blog" target="_blank">Blog</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Aqua Tecnologia. Todos os direitos reservados. | 
+                   <a href="/privacy.html">Política de Privacidade</a> | 
+                   <a href="/terms.html">Termos de Uso</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Botão Voltar ao Topo -->
+    <button class="back-to-top" id="back-to-top" data-tooltip="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- JavaScript -->
+    <script src="/assets/js/main.js"></script>
+    
+    <!-- Analytics (Google Analytics ou similar) -->
+    <script>
+        // Implementar analytics em produção
+        console.log('Showcase Docs Portal loaded successfully');
+    </script>
+</body>
+</html>
+
